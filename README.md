@@ -194,9 +194,6 @@ The platform’s goal is to make dealing with government paperwork simpler, fast
 - **Content Marketing:**  
   Create informative posts and blogs explaining simplified versions of document processes, linking to the full premium guide.
 
-- **Referral Program:**  
-  Offer users a small discount or one-day free access for referring others.
-
 - **Institutional Collaborations:**  
   Partner with organizations and universities to offer group subscription plans for their staff and students.
 
