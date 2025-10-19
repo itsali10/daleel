@@ -137,3 +137,120 @@ The platform’s goal is to make dealing with government paperwork simpler, fast
   Profile > Security > Enable 2FA or Change Password.
 
 ---
+
+## 3. Business Case
+
+### 3.1. Market Analysis
+
+- **Target Market:**  
+  Egyptian citizens and residents who need to obtain or renew official documents such as national IDs, passports, birth certificates, driver’s licenses, or tax files.  
+  The target audience includes **students, professionals, expats, and families**—people who regularly interact with government entities and need **clear, reliable guidance**.
+
+- **Problem Validation:**  
+  Government processes in Egypt are often **confusing, fragmented, and time-consuming**.  
+  Many citizens face difficulties due to **outdated information**, **unclear requirements**, and **long queues caused by incomplete paperwork**.  
+  There is currently **no centralized, user-friendly platform** that explains each process step-by-step or provides verified, updated details.
+
+- **Market Size:**  
+  Egypt has a population exceeding **110 million**, with millions of document transactions conducted annually.  
+  As digital transformation accelerates across government services, the demand for **online guidance platforms** is expected to grow rapidly.  
+  The market opportunity lies in serving both individuals and organizations that require frequent document processing.
+
+- **Competition:**  
+  There are **no comprehensive competitors** currently offering a paid, centralized, and verified guide for government documentation in Egypt.  
+  Existing information sources (Facebook groups, forums, individual blogs) are unreliable and unstructured.
+
+---
+
+### 3.2. Revenue Models
+
+1. **Subscription Model:**
+   - **Paid Access Only:** All users must subscribe to access the website’s guides and documentation.
+   - **Subscription Tiers:**  
+     - **Monthly Plan:** Short-term access for users handling one or two documents.  
+     - **Annual Plan:** Discounted rate for frequent users and businesses.
+   - **Included Features:**
+     - Full access to all government documentation guides.  
+     - Office locator with interactive map.  
+     - Step-by-step downloadable checklists.  
+     - Updates and notifications for changing requirements and fees.  
+     - Multi-language access (Arabic/English).
+
+2. **Partnership Opportunities:**
+   - Collaborate with **legal offices, translation agencies, or notary services** to promote premium plans.  
+   - Establish affiliate programs with courier/document delivery services.  
+   - Offer partnerships to **universities or HR departments** to provide access for employees and students.  
+
+---
+
+### 3.3. User Acquisition Strategy
+
+- **Digital Marketing:**  
+  Run targeted campaigns on Facebook, Instagram, TikTok, and Google Search, focusing on keywords like “renew passport Egypt” or “get ID quickly”.
+
+- **Search Engine Optimization (SEO):**  
+  Optimize service pages to appear in search results for documentation-related queries in both Arabic and English.
+
+- **Content Marketing:**  
+  Create informative posts and blogs explaining simplified versions of document processes, linking to the full premium guide.
+
+- **Referral Program:**  
+  Offer users a small discount or one-day free access for referring others.
+
+- **Institutional Collaborations:**  
+  Partner with organizations and universities to offer group subscription plans for their staff and students.
+
+- **Email Marketing:**  
+  Send periodic newsletters about newly added documentation guides or updated government procedures.
+
+---
+
+### 3.4. Cost Structure
+
+- **Development Costs:**  
+  Frontend development (React), backend (NestJS), and Supabase integration for database and authentication.
+
+- **Maintenance Costs:**  
+  Hosting on Vercel (frontend) and Render/Railway (backend), database management, and API maintenance for maps and location services.
+
+- **Marketing & Operations:**  
+  Paid advertising, SEO optimization, content creation, and customer support.
+
+- **Operational Costs:**  
+  Team salaries (developers, designers, content managers, marketing), payment gateway fees, and legal setup.
+
+---
+
+### 3.5. Break-Even Analysis and Projected ROI
+
+- **Assumptions:**  
+  Based on estimated user acquisition cost (CAC), monthly subscriptions, and annual retention rate.  
+  Revenue will scale with the number of active subscribers.
+
+- **Break-Even Point:**  
+  Expected within **2–3 years** of launch, assuming steady user growth through digital marketing and institutional partnerships.
+
+- **Projected ROI:**  
+  With moderate adoption, the project can achieve ROI > 1 within **4–5 years**.  
+  Growth depends on expanding content coverage and increasing institutional subscribers.
+
+---
+
+### 3.6. Potential Expansion Opportunities
+
+- **Feature Expansion:**  
+  Add online appointment scheduling for government services, document tracking, and notifications for renewal deadlines.
+
+- **Integration Expansion:**  
+  Integrate with government APIs (where available) to verify office hours or required documents in real-time.
+
+- **Platform Expansion:**  
+  Launch a **mobile app** version for easier access and offline document viewing.
+
+- **Geographical Expansion:**  
+  Extend coverage to other Arab countries with similar bureaucratic processes (e.g., Jordan, UAE).
+
+- **B2B Offerings:**  
+  Offer tailored enterprise dashboards for HR departments or agencies managing employee documentation.
+
+---
