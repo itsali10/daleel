@@ -16,14 +16,14 @@ The platform’s goal is to make dealing with government paperwork simpler, fast
 5. Lack of transparency and clarity in official processes.
 
 **Technical Stack:**
--- **Frontend:** React.js  
--- **Backend:** NestJS  
--- **Database & Auth:** Supabase (PostgreSQL + Auth + Storage)  
--- **Language:** TypeScript  
--- **Styling:** Tailwind CSS or Material UI  
--- **Routing:** React Router  
--- **State Management:** React Query or Context API  
--- **Theming:** Dark/Light mode support  
--- **Security:** JWT authentication and subscription-based access control  
--- **Deployment:** Vercel (frontend) and Render or Railway (backend)
+- **Frontend:** React.js  
+- **Backend:** NestJS  
+- **Database & Auth:** Supabase (PostgreSQL + Auth + Storage)  
+- **Language:** TypeScript  
+- **Styling:** Tailwind CSS or Material UI  
+- **Routing:** React Router  
+- **State Management:** React Query or Context API  
+- **Theming:** Dark/Light mode support  
+- **Security:** JWT authentication and subscription-based access control  
+- **Deployment:** Vercel (frontend) and Render or Railway (backend)
 
