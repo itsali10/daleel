@@ -8,14 +8,9 @@ Users must create an account and subscribe to gain access to the platform.
 Only paid subscribers can view the documentation, guides, and step-by-step procedures.
 The platform’s goal is to make dealing with government paperwork simpler, faster, and more reliable, eliminating confusion and wasted time.
 
-Core Problems Addressed:
-
-Scattered and outdated information about government procedures.
-
-Difficulty identifying correct steps, fees, and required forms.
-
-Frequent wasted visits due to missing or incorrect documents.
-
-No centralized, verified source for all documentation needs.
-
-Lack of transparency and clarity in official processes.
+**Core Problems Addressed:**
+1. Scattered and outdated information about government procedures.
+2. Difficulty identifying correct steps, fees, and required forms.
+3. Frequent wasted visits due to missing or incorrect documents.
+4. No centralized, verified source for all documentation needs.
+5. Lack of transparency and clarity in official processes.
