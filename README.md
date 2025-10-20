@@ -1,5 +1,35 @@
 # Daleel Application Documentation
 
+- [Daleel Application Documentation](#daleel-application-documentation)
+  - [Project Overview](#project-overview)
+  - [1. UML Diagrams](#1-uml-diagrams)
+    - [1.1. Component Diagram](#11-component-diagram)
+    - [1.2. Sequence Diagram: Subscription Flow](#12-sequence-diagram-subscription-flow)
+    - [1.3. Class / Entity Diagram: Data Model](#13-class--entity-diagram-data-model)
+    - [1.4. Sequence Diagram: Viewing a Government Procedure](#14-sequence-diagram-viewing-a-government-procedure)
+    - [1.5. Use Case Diagram](#15-use-case-diagram)
+  - [2. Application Manual](#2-application-manual)
+    - [2.1. Feature Guides](#21-feature-guides)
+      - [2.1.1. Government Documentation Search & Access](#211-government-documentation-search--access)
+      - [2.1.2. Office Locator](#212-office-locator)
+      - [2.1.3. Step-by-Step Checklist](#213-step-by-step-checklist)
+      - [2.1.4. Subscription & Account Management](#214-subscription--account-management)
+    - [2.2. Settings Configuration](#22-settings-configuration)
+  - [3. Business Case](#3-business-case)
+    - [3.1. Market Analysis](#31-market-analysis)
+    - [3.2. Revenue Models](#32-revenue-models)
+    - [3.3. User Acquisition Strategy](#33-user-acquisition-strategy)
+    - [3.4. Cost Structure](#34-cost-structure)
+    - [3.5. Break-Even Analysis and Projected ROI](#35-break-even-analysis-and-projected-roi)
+    - [3.6. Potential Expansion Opportunities](#36-potential-expansion-opportunities)
+  - [4. SWOT Analysis](#4-swot-analysis)
+    - [Strengths](#strengths)
+    - [Weaknesses](#weaknesses)
+    - [Opportunities](#opportunities)
+    - [Threats](#threats)
+  - [Addressing Key Problem Statements](#addressing-key-problem-statements)
+
+
 ## Project Overview
 This project is a modern web platform that provides complete guidance on how and where to obtain government documentation in Egypt, such as ID cards, passports, birth certificates, licenses, and more.
 The website offers detailed, verified, and continuously updated instructions on each process — including required documents, steps, fees, and official locations.
