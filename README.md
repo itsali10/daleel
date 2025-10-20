@@ -23,6 +23,223 @@ The platform’s goal is to make dealing with government paperwork simpler, fast
 - **State Management:** React Query or Context API  
 - **Security:** JWT authentication and subscription-based access control
 
+## 1. UML Diagrams
+
+### 1.1. Component Diagram
+
+This diagram illustrates the high-level architecture and dependencies between major components of the **Daleel** platform.
+
+```mermaid
+graph TD
+    subgraph "Daleel Web Application (React Frontend)"
+        UI["UI Layer - React Components and Tailwind CSS"]
+        ROUTER["React Router - Page Navigation"]
+        STATE["State Management - React Query or Context API"]
+        AUTHUI["Authentication UI - Supabase Auth Client"]
+        THEME["Theme Engine - Dark or Light Mode"]
+
+        subgraph "Core Features"
+            PROC["Procedures Module - Government Guides"]
+            OFFICES["Offices Module - Office Locator and Maps"]
+            CHECKLISTS["Checklists Module - Step Tracking"]
+            SUBS["Subscription Management Module"]
+            PROFILE["User Profile and Account Management"]
+        end
+
+        subgraph "Services and Logic"
+            API_CLIENT["API Client - Axios or Fetch"]
+            AUTH_SERVICE["Auth Service - Supabase Integration"]
+            STORAGE["Supabase Storage - Images and PDFs"]
+            PAY_SERVICE["Payment Integration Logic"]
+        end
+    end
+
+    subgraph "Backend Services (NestJS)"
+        API["Daleel Backend API"]
+        DB["PostgreSQL via Supabase"]
+        PAYMENTS["Payment Provider - Paymob or Fawry"]
+        MAPS["Map Service API - Google or Mapbox"]
+    end
+
+    %% Connections
+    UI --> ROUTER
+    UI --> STATE
+    UI --> AUTHUI
+    UI --> THEME
+    ROUTER --> PROC
+    ROUTER --> OFFICES
+    ROUTER --> CHECKLISTS
+    ROUTER --> SUBS
+    ROUTER --> PROFILE
+
+    PROC --> API_CLIENT
+    PROC --> STATE
+    OFFICES --> API_CLIENT
+    OFFICES --> MAPS
+    CHECKLISTS --> API_CLIENT
+    SUBS --> API_CLIENT
+    SUBS --> PAY_SERVICE
+    PROFILE --> API_CLIENT
+    PROFILE --> AUTH_SERVICE
+
+    API_CLIENT --> API
+    AUTH_SERVICE --> API
+    PAY_SERVICE --> PAYMENTS
+    API --> DB
+```
+
+---
+
+### 1.2. Sequence Diagram: Subscription Flow
+
+This diagram shows the sequence of interactions when a user subscribes to access Daleel’s content.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant WebApp as "Daleel Web App"
+    participant Backend as "Backend API (NestJS)"
+    participant Supabase as "Supabase Auth and DB"
+    participant Paymob as "Payment Provider"
+
+    User->>WebApp: Clicks Subscribe
+    WebApp->>Supabase: Verify authentication
+    WebApp->>Backend: Request new payment session
+    Backend->>Paymob: Create payment session
+    Paymob-->>Backend: Return payment link and session_id
+    Backend-->>WebApp: Return payment link
+    WebApp->>User: Redirects to Paymob checkout
+    User->>Paymob: Completes payment
+    Paymob-->>Backend: Send webhook with payment success
+    Backend->>Supabase: Update user profile (is_premium = true)
+    Supabase-->>Backend: Confirm update
+    Backend-->>WebApp: Notify subscription active
+    WebApp-->>User: Display success message and unlock guides
+```
+
+---
+
+### 1.3. Class / Entity Diagram: Data Model
+
+This represents the main database entities and their relationships.
+
+```mermaid
+classDiagram
+    class AuthUser {
+        +uuid id
+        +email
+        +password (handled by Supabase)
+    }
+
+    class Profile {
+        +uuid user_id
+        +string full_name
+        +bool is_premium
+        +string premium_tier
+        +timestamp premium_expires_at
+        +string locale
+    }
+
+    class Procedure {
+        +uuid id
+        +string slug
+        +string title_ar
+        +string title_en
+        +text summary
+        +int est_time_minutes
+        +decimal est_cost_egp
+        +bool is_premium_only
+        +timestamp last_verified_at
+    }
+
+    class Step {
+        +uuid id
+        +uuid procedure_id
+        +int order_index
+        +text body_ar
+        +text body_en
+        +uuid office_hint_id
+        +text required_docs
+        +decimal fee_extra_egp
+    }
+
+    class Office {
+        +uuid id
+        +string name
+        +string agency
+        +string city
+        +string address
+        +float latitude
+        +float longitude
+        +time opens_at
+        +time closes_at
+    }
+
+    class Checklist {
+        +uuid id
+        +uuid user_id
+        +uuid procedure_id
+        +json items
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    class PaymentSession {
+        +uuid id
+        +uuid user_id
+        +string provider
+        +string provider_session_id
+        +string status
+        +string plan
+        +decimal amount_egp
+        +timestamp created_at
+    }
+
+    AuthUser "1" --> "1" Profile : has
+    Profile "1" --> "1" PaymentSession : creates
+    AuthUser "1" --> "*" Checklist : owns
+    AuthUser "1" --> "*" PaymentSession : makes
+    Procedure "1" --> "*" Step : contains
+    Step "*" --> "1" Office : handled_by
+    Procedure "*" --> "*" Office : served_at
+    AuthUser "*" --> "*" Procedure : saves_or_views
+```
+
+---
+
+### 1.4. Sequence Diagram: Viewing a Government Procedure
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant WebApp as "Daleel Web App"
+    participant Backend as "Backend API"
+    participant Supabase as "Database (Supabase Postgres)"
+
+    User->>WebApp: Logs in and selects a procedure
+    WebApp->>Backend: GET /procedures/:id
+    Backend->>Supabase: Query procedure, steps, and offices
+    Supabase-->>Backend: Return data
+    Backend-->>WebApp: Send complete procedure details
+    WebApp-->>User: Display steps and office map
+    User->>WebApp: Click Generate Checklist
+    WebApp->>Backend: POST /checklists
+    Backend->>Supabase: Create checklist record
+    Supabase-->>Backend: Confirm success
+    Backend-->>WebApp: Return checklist
+    WebApp-->>User: Show interactive checklist
+```
+
+---
+
+### 1.5. Use Case Diagram
+
+![WhatsApp Image 2025-10-20 at 02 02 49_2f6c1168](https://github.com/user-attachments/assets/ed641dcc-2b7d-4182-a31f-99ecf354af6e)
+
+> This diagram shows the main actors and their interactions with the system.  
+> The *User* interacts with the Daleel platform to create an account, subscribe, search, and view procedures, while the *Admin* manages content and pricing.  
+> The *Payment Provider* handles external payment transactions.
+
 
 ## 2. Application Manual
 
