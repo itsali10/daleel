@@ -126,25 +126,31 @@ This diagram shows the sequence of interactions when a user subscribes to access
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant WebApp as "Daleel Web App"
-    participant Backend as "Backend API (NestJS)"
-    participant Supabase as "Supabase Auth and DB"
-    participant Paymob as "Payment Provider"
+    actor User
+    participant FE as Frontend
+    participant Auth as Supabase Auth
+    participant BE as Backend
+    participant Pay as Payment Gateway
+    participant DB as Supabase DB
 
-    User->>WebApp: Clicks Subscribe
-    WebApp->>Supabase: Verify authentication
-    WebApp->>Backend: Request new payment session
-    Backend->>Paymob: Create payment session
-    Paymob-->>Backend: Return payment link and session_id
-    Backend-->>WebApp: Return payment link
-    WebApp->>User: Redirects to Paymob checkout
-    User->>Paymob: Completes payment
-    Paymob-->>Backend: Send webhook with payment success
-    Backend->>Supabase: Update user profile (is_premium = true)
-    Supabase-->>Backend: Confirm update
-    Backend-->>WebApp: Notify subscription active
-    WebApp-->>User: Display success message and unlock guides
+    User ->> FE: Sign up with email/password
+    FE ->> Auth: Create user
+    Auth ->> FE: Return supabase_uid
+
+    FE ->> BE: Create user in DB (supabase_uid + metadata)
+    BE ->> DB: Insert user record
+    DB ->> BE: Success
+
+    User ->> FE: Select subscription plan
+    FE ->> BE: Request payment session
+    BE ->> Pay: Create payment session
+    Pay ->> FE: Redirect to payment
+
+    User ->> Pay: Complete payment
+    Pay ->> BE: Payment success webhook
+    BE ->> DB: Update subscription status
+    BE ->> FE: Subscription active
+
 ```
 
 ---
