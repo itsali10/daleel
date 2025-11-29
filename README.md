@@ -324,8 +324,49 @@ sequenceDiagram
 ---
 
 ### 1.5. Use Case Diagram
+```mermaid
+flowchart LR
 
-![WhatsApp Image 2025-10-20 at 02 02 49_2f6c1168](https://github.com/user-attachments/assets/ed641dcc-2b7d-4182-a31f-99ecf354af6e)
+      User(["Business Owner"])
+      ETA(["ETA System"])
+
+      subgraph UseCases["Tax Filing Web App"]
+          UC1["Register Account"]
+          UC2["Log In"]
+          UC3["Add Business Info"]
+          UC4["Configure ETA Credentials"]
+          UC5["Create Invoices"]
+          UC6["Submit Invoices to ETA"]
+          UC7["Track Submission Status"]
+          UC8["Enter Income & Expenses"]
+          UC9["Generate Tax Estimation"]
+          UC10["File Taxes"]
+          UC11["View Past Filings"]
+          UC12["Upload Business Documents"]
+          UC13["Subscribe to Premium"]
+          UC14["Manage Billing"]
+      end
+
+      User --> UC1
+      User --> UC2
+      User --> UC3
+      User --> UC4
+      User --> UC5
+      User --> UC6
+      User --> UC7
+      User --> UC8
+      User --> UC9
+      User --> UC10
+      User --> UC11
+      User --> UC12
+      User --> UC13
+      User --> UC14
+
+      UC6 --> ETA
+      UC10 --> ETA
+```
+---
+
 
 > This diagram shows the main actors and their interactions with the system.  
 > The *User* interacts with the Daleel platform to create an account, subscribe, search, and view procedures, while the *Admin* manages content and pricing.  
