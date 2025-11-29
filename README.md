@@ -302,23 +302,18 @@ classDiagram
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant WebApp as "Daleel Web App"
-    participant Backend as "Backend API"
-    participant Supabase as "Database (Supabase Postgres)"
+    actor User
+    participant FE as Frontend
+    participant BE as Backend
+    participant DB as Supabase DB
 
-    User->>WebApp: Logs in and selects a procedure
-    WebApp->>Backend: GET /procedures/:id
-    Backend->>Supabase: Query procedure, steps, and offices
-    Supabase-->>Backend: Return data
-    Backend-->>WebApp: Send complete procedure details
-    WebApp-->>User: Display steps and office map
-    User->>WebApp: Click Generate Checklist
-    WebApp->>Backend: POST /checklists
-    Backend->>Supabase: Create checklist record
-    Supabase-->>Backend: Confirm success
-    Backend-->>WebApp: Return checklist
-    WebApp-->>User: Show interactive checklist
+    User ->> FE: Open procedure page
+    FE ->> BE: GET /procedures/:id
+    BE ->> DB: Query procedure_steps
+    DB ->> BE: Return procedure data
+    BE ->> FE: JSON response
+    FE ->> User: Display steps to follow
+
 ```
 
 ---
