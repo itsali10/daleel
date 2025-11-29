@@ -155,163 +155,144 @@ This represents the main database entities and their relationships.
 
 ```mermaid
 classDiagram
-class auth_users {
-  +uuid id
-  --
-  +get_user_by_id(id)
-  +get_users_by_ids(ids[])
-  +on_user_created_webhook(payload)
-}
 
-class profiles {
-  +uuid user_id
-  full_name text
-  is_premium boolean
-  premium_tier varchar
-  premium_expires_at timestamp
-  locale varchar
-  created_at timestamp
-  --
-  +create_profile(user_id, full_name, locale)
-  +get_profile_by_user_id(user_id)
-  +update_profile(user_id, patch)
-  +set_premium(user_id, tier, expires_at)
-  +revoke_premium(user_id)
-  +is_premium_active(user_id): boolean
-}
+    class User {
+      UUID id
+      UUID supabase_uid
+      string email
+      string full_name
+      string mobile
+      string national_id
+      timestamp created_at
+      timestamp updated_at
 
-class procedures {
-  +uuid id
-  slug varchar
-  title_ar text
-  title_en text
-  summary_ar text
-  summary_en text
-  est_time_minutes int
-  est_cost_egp numeric(10,2)
-  version int
-  last_verified_at timestamp
-  is_premium_only boolean
-  created_at timestamp
-  updated_at timestamp
-  --
-  +create_procedure(payload)
-  +update_procedure(id, patch)
-  +publish_new_version(id)
-  +mark_verified(id, ts)
-  +get_procedure_by_slug(slug)
-  +get_procedure_with_steps_and_offices(id)
-  +search_procedures(q, city, limit, offset)
-  +list_recently_verified(limit)
-}
+      +register()
+      +authenticate()
+      +updateProfile()
+      +linkBusiness()
+    }
 
-class steps {
-  +uuid id
-  procedure_id uuid
-  order_index int
-  body_ar text
-  body_en text
-  office_hint_id uuid
-  fee_extra_egp numeric(10,2)
-  required_docs text
-  created_at timestamp
-  --
-  +add_step(procedure_id, payload)
-  +reorder_steps(procedure_id, orders[])
-  +update_step(id, patch)
-  +delete_step(id)
-  +list_steps_for_procedure(procedure_id)
-}
+    class Business {
+      UUID id
+      UUID user_id
+      string tax_reg_number
+      string activity_type
+      string revenue_bracket
+      string eta_integration_status
+      timestamp created_at
 
-class offices {
-  +uuid id
-  agency text
-  name text
-  city text
-  address text
-  latitude double
-  longitude double
-  opens_at time
-  closes_at time
-  notes text
-  --
-  +create_office(payload)
-  +update_office(id, patch)
-  +get_office(id)
-  +search_offices(city, agency, q, limit, offset)
-  +nearest_offices(lat, lng, radius_km)
-}
+      +createBusiness()
+      +updateBusinessInfo()
+      +syncWithETA()
+      +getInvoices()
+      +calculateTax()
+    }
 
-class procedure_offices {
-  +procedure_id uuid
-  +office_id uuid
-  --
-  +link_office_to_procedure(procedure_id, office_id)
-  +unlink_office_from_procedure(procedure_id, office_id)
-  +list_offices_for_procedure(procedure_id)
-  +list_procedures_for_office(office_id)
-}
+    class EtaCredentials {
+      UUID id
+      UUID business_id
+      string client_id
+      string client_secret
+      string token
+      timestamp token_expiry
 
-class user_saves {
-  +user_id uuid
-  +procedure_id uuid
-  created_at timestamp
-  --
-  +save_procedure(user_id, procedure_id)
-  +unsave_procedure(user_id, procedure_id)
-  +is_saved(user_id, procedure_id): boolean
-  +list_saved_procedures(user_id, limit, offset)
-}
+      +refreshToken()
+      +validateToken()
+    }
 
-class checklists {
-  +uuid id
-  user_id uuid
-  procedure_id uuid
-  title text
-  items json
-  created_at timestamp
-  updated_at timestamp
-  --
-  +create_checklist(user_id, procedure_id, payload)
-  +get_checklist(id)
-  +list_checklists_by_user(user_id, procedure_id)
-  +update_checklist_items(id, items_json)
-  +rename_checklist(id, title)
-  +delete_checklist(id)
-  +toggle_item(id, index, done)
-}
+    class Invoice {
+      UUID id
+      UUID business_id
+      string invoice_uuid
+      string invoice_number
+      string customer_name
+      string customer_tax_id
+      date issue_date
+      float total_amount
+      string eta_submission_status
+      string eta_document_id
 
-class payment_sessions {
-  +uuid id
-  user_id uuid
-  provider varchar
-  provider_session_id varchar
-  status varchar
-  plan varchar
-  amount_egp numeric(10,2)
-  created_at timestamp
-  --
-  +create_payment_session(user_id, provider, plan, amount_egp)
-  +get_payment_session(id)
-  +handle_payment_webhook(payload)
-  +mark_session_paid(id)
-  +list_payments_by_user(user_id, limit, offset)
-  +latest_active_subscription(user_id)
-}
+      +createInvoice()
+      +submitToETA()
+      +calculateTotal()
+      +attachItems()
+    }
 
-%% Relationships
-auth_users "1" --> "0..1" profiles : has
-auth_users "1" --> "0..*" user_saves : saves
-auth_users "1" --> "0..*" checklists : owns
-auth_users "1" --> "0..*" payment_sessions : pays
+    class InvoiceItem {
+      UUID id
+      UUID invoice_id
+      string description
+      int quantity
+      float unit_price
+      string tax_type
+      float tax_rate
+      float total
 
-procedures "1" --> "0..*" steps : contains
-procedures "1" --> "0..*" user_saves : is_saved_in
-procedures "1" --> "0..*" checklists : has
-procedures "1" --> "0..*" procedure_offices : mapped_by
+      +calculateLineTotal()
+      +updateQuantity()
+    }
 
-offices "1" --> "0..*" procedure_offices : mapped_by
-steps "0..*" --> "0..1" offices : hinted_by
+    class IncomeReport {
+      UUID id
+      UUID business_id
+      int month
+      int year
+      float revenue
+      float expenses
+
+      +generateMonthlyReport()
+      +updateReport()
+    }
+
+    class TaxCalculation {
+      UUID id
+      UUID business_id
+      date period_start
+      date period_end
+      float calculated_tax
+      json calculation_details
+
+      +calculate()
+      +updateCalculation()
+      +explainDetails()
+    }
+
+    class TaxFiling {
+      UUID id
+      UUID business_id
+      string filing_period
+      string filing_pdf_url
+      string submission_status
+      string submission_reference
+
+      +generatePDF()
+      +submitToETA()
+      +checkSubmissionStatus()
+    }
+
+    class Payment {
+      UUID id
+      UUID business_id
+      float amount
+      string payment_method
+      string transaction_id
+      string status
+      timestamp created_at
+
+      +initiatePayment()
+      +verifyPayment()
+      +refundPayment()
+    }
+
+
+    User "1" -- "many" Business
+    Business "1" -- "1" EtaCredentials
+    Business "1" -- "many" Invoice
+    Invoice "1" -- "many" InvoiceItem
+    Business "1" -- "many" IncomeReport
+    Business "1" -- "many" TaxCalculation
+    Business "1" -- "many" TaxFiling
+    Business "1" -- "many" Payment
 
 ```
 
