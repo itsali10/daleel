@@ -60,62 +60,38 @@ The platform’s goal is to make dealing with government paperwork simpler, fast
 This diagram illustrates the high-level architecture and dependencies between major components of the **Daleel** platform.
 
 ```mermaid
-graph TD
-    subgraph "Daleel Web Application (React Frontend)"
-        UI["UI Layer - React Components and Tailwind CSS"]
-        ROUTER["React Router - Page Navigation"]
-        STATE["State Management - React Query or Context API"]
-        AUTHUI["Authentication UI - Supabase Auth Client"]
-        THEME["Theme Engine - Dark or Light Mode"]
-
-        subgraph "Core Features"
-            PROC["Procedures Module - Government Guides"]
-            OFFICES["Offices Module - Office Locator and Maps"]
-            CHECKLISTS["Checklists Module - Step Tracking"]
-            SUBS["Subscription Management Module"]
-            PROFILE["User Profile and Account Management"]
-        end
-
-        subgraph "Services and Logic"
-            API_CLIENT["API Client - Axios or Fetch"]
-            AUTH_SERVICE["Auth Service - Supabase Integration"]
-            STORAGE["Supabase Storage - Images and PDFs"]
-            PAY_SERVICE["Payment Integration Logic"]
-        end
+graph LR
+    subgraph Frontend
+        FE["Web App (React/Next.js)"]
     end
 
-    subgraph "Backend Services (NestJS)"
-        API["Daleel Backend API"]
-        DB["PostgreSQL via Supabase"]
-        PAYMENTS["Payment Provider - Paymob or Fawry"]
-        MAPS["Map Service API - Google or Mapbox"]
+    subgraph Backend["Backend (NestJS)"]
+        U["Users Module"]
+        B["Businesses Module"]
+        I["Invoices Module"]
+        IR["Income Reports Module"]
+        TC["Tax Calculation Module"]
+        TF["Tax Filing Module"]
+        ETA["ETA Integration Module"]
+        PAY["Payments Module"]
     end
 
-    %% Connections
-    UI --> ROUTER
-    UI --> STATE
-    UI --> AUTHUI
-    UI --> THEME
-    ROUTER --> PROC
-    ROUTER --> OFFICES
-    ROUTER --> CHECKLISTS
-    ROUTER --> SUBS
-    ROUTER --> PROFILE
+    subgraph Supabase
+        AUTH["Auth Service"]
+        DB["PostgreSQL Database"]
+    end
 
-    PROC --> API_CLIENT
-    PROC --> STATE
-    OFFICES --> API_CLIENT
-    OFFICES --> MAPS
-    CHECKLISTS --> API_CLIENT
-    SUBS --> API_CLIENT
-    SUBS --> PAY_SERVICE
-    PROFILE --> API_CLIENT
-    PROFILE --> AUTH_SERVICE
+    subgraph External
+        EG["ETA Government API"]
+        PM["Payment Provider (Stripe / Paymob)"]
+    end
 
-    API_CLIENT --> API
-    AUTH_SERVICE --> API
-    PAY_SERVICE --> PAYMENTS
-    API --> DB
+    FE -->|"REST API"| Backend
+    Backend -->|"JWT Auth"| AUTH
+    Backend -->|"TypeORM"| DB
+    Backend -->|"OAuth + Submit Docs"| EG
+    Backend -->|"Create Subscription"| PM
+
 ```
 
 ---
