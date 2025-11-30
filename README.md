@@ -1,5 +1,7 @@
 # Daleel Application Documentation
 
+# 🗺️ Table of Contents
+
 - [Daleel Application Documentation](#daleel-application-documentation)
   - [Project Overview](#project-overview)
   - [1. UML Diagrams](#1-uml-diagrams)
@@ -28,6 +30,8 @@
     - [Opportunities](#opportunities)
     - [Threats](#threats)
   - [Addressing Key Problem Statements](#addressing-key-problem-statements)
+
+---
 
 
 ## Project Overview
