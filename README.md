@@ -349,304 +349,119 @@ flowchart LR
 ```
 ---
 
+## 2. 📘 Application Manual
 
-> This diagram shows the main actors and their interactions with the system.  
-> The *User* interacts with the Daleel platform to create an account, subscribe, search, and view procedures, while the *Admin* manages content and pricing.  
-> The *Payment Provider* handles external payment transactions.
+This section serves as a comprehensive user guide, explaining how to use all the platform's features, from searching documentation to managing subscriptions and configuring settings.
 
-
-## 2. Application Manual
+---
 
 ### 2.1. Feature Guides
 
 #### 2.1.1. Government Documentation Search & Access
 
-- **Overview:**  
-  Access the **“Services”** section from the main navigation bar.  
-  The main page provides a categorized list of all available government documentation guides (e.g., National ID, Passport Renewal, Birth Certificate, Driver’s License, etc.).
-
-  - Browse or search for any government service using keywords (e.g., “passport”, “tax card”).  
-  - Each service entry displays a short summary, estimated time, and associated fees.  
-  - Click on a service to open its detailed guide.
-
-- **Viewing a Documentation Guide:**  
-  - After selecting a service, you will be redirected to a step-by-step guide.  
-  - Each step includes:
-    - Description of the process (e.g., “Submit the completed application form at your local civil office”).  
-    - Required documents.  
-    - Associated fees and payment methods.  
-    - Estimated processing time.  
-  - You can mark steps as completed as you progress.
-
-- **Subscription Access:**  
-  - All users must **create an account** and **subscribe** to access any documentation guide.  
-  - After logging in, navigate to **“Subscribe”** to activate your premium plan.  
-  - Once subscribed, full access to all documentation guides, office locators, and downloadable checklists becomes available.
-
-- **Search Filters:**  
-  - Filter by category (e.g., “Civil Status”, “Traffic & Licenses”, “Taxes & Business”).  
-  - Filter by city or region to view offices closest to you.  
-  - Sort results by most viewed or most recent updates.
-
----
+This feature provides a centralized, up-to-date repository of all relevant **government tax documentation** and regulations (e.g., ETA circulars, filing deadlines, legal amendments). Users can use **keywords** to search, filter by **topic** or **date**, and access **PDF or text summaries** directly within the application, ensuring they always have the correct and current information.
 
 #### 2.1.2. Office Locator
 
-- **Overview:**  
-  Access the **“Offices”** section to find nearby government service branches.  
-  The map view displays each office location and its available services.
-
-  - Each office card shows:
-    - Office name and category (e.g., “Nasr City Civil Registry”).  
-    - Address, working hours, and contact details.  
-    - Supported services (e.g., National ID Renewal, Birth Certificate).  
-
-- **Using the Map View:**  
-  - You can zoom in/out to explore different areas.  
-  - Click a location marker to view office details and navigate using Google Maps or Mapbox integration.  
-  - The system automatically detects your city to prioritize nearby offices.
-
----
+The Office Locator helps users quickly find the **nearest official government tax offices or service centers**. The feature uses **geo-location** (if permission is granted) or manually entered addresses/cities. It displays the office's **address**, **contact information**, **operating hours**, and provides **turn-by-turn navigation** via an integrated map.
 
 #### 2.1.3. Step-by-Step Checklist
 
-- **Overview:**  
-  Each documentation guide includes a dynamic checklist generated from the service steps.  
-  The checklist allows users to track their progress.
-
-- **Usage:**
-  - Open a service guide (e.g., “Renew National ID”).  
-  - Tap **“Generate Checklist”** to create a personalized list.  
-  - Check items off as you complete them.  
-  - Download or print the checklist for offline use (PDF format).
-
----
+This tool breaks down complex compliance processes (e.g., **Business Registration**, **Quarterly VAT Filing**, **ETA E-Invoicing Setup**) into **simple, sequential, and actionable steps**. Each step includes a brief explanation, required documents, and a **completion checkbox**. The checklist helps users track their progress and ensures no critical requirement is missed. 
 
 #### 2.1.4. Subscription & Account Management
 
-- **Overview:**  
-  Access the **“Profile”** tab in the navigation menu to manage account details and subscription.
-
-- **Account Information:**  
-  - View and edit your name and email.  
-  - Manage your subscription plan (monthly or annual).  
-  - View payment history and renewal date.
-
-- **Subscription Settings:**  
-  - Upgrade or cancel your subscription anytime.  
-  - Automatic renewal is enabled unless disabled manually.  
-  - Access to all guides is revoked if the subscription expires.
-
-- **Security Settings:**  
-  - Change password and manage login credentials.  
-  - Two-factor authentication (2FA) available for added security.  
-  - Session logout available for all connected devices.
-
-- **Theme Preferences:**  
-  - Toggle between **Light Mode** and **Dark Mode** from the profile settings.
+Users can view and update their personal and business profiles, including contact details and tax registration numbers. This section also handles **Subscription Management**, allowing users to **view current plans**, **upgrade or downgrade tiers** (e.g., Monthly vs. Annual), and access **billing history**. All payments are securely processed via integrated third-party providers like Stripe/Paymob.
 
 ---
 
 ### 2.2. Settings Configuration
 
-- **Theme:**  
-  Profile > Preferences > Theme > Select “Light” or “Dark”.
+This section allows users to customize their platform experience and manage integration credentials.
 
-- **Language:**  
-  Profile > Preferences > Language > Choose Arabic or English (default).
-
-- **Notifications:**  
-  Profile > Preferences > Notifications > Enable or disable email alerts for service updates.
-
-- **Checklist Management:**  
-  Services > Select a Procedure > Generate Checklist > Download or Print.
-
-- **Subscription Renewal:**  
-  Profile > Subscription > Manage Plan > Renew or Cancel Subscription.
-
-- **Security Settings:**  
-  Profile > Security > Enable 2FA or Change Password.
+* **Notification Settings:** Configure preferences for deadlines, status changes (e.g., invoice rejection), and documentation updates (Email, SMS, or In-App).
+* **Business Defaults:** Set default tax rates, currency, and primary business address for automatic application to new invoices.
+* **Integration Management:** Configure and manage credentials for **ETA e-Invoicing** (Client ID, Secret) and other potential third-party accounting software APIs.
 
 ---
 
-## 3. Business Case
+## 3. 💼 Business Case
+
+This section outlines the financial and strategic foundations of the platform, detailing how it will generate revenue, acquire users, and achieve profitability.
+
+---
 
 ### 3.1. Market Analysis
 
-- **Target Market:**  
-  Egyptian citizens and residents who need to obtain or renew official documents such as national IDs, passports, birth certificates, driver’s licenses, or tax files.  
-  The target audience includes **students, professionals, expats, and families**—people who regularly interact with government entities and need **clear, reliable guidance**.
-
-- **Problem Validation:**  
-  Government processes in Egypt are often **confusing, fragmented, and time-consuming**.  
-  Many citizens face difficulties due to **outdated information**, **unclear requirements**, and **long queues caused by incomplete paperwork**.  
-  There is currently **no centralized, user-friendly platform** that explains each process step-by-step or provides verified, updated details.
-
-- **Market Size:**  
-  Egypt has a population exceeding **110 million**, with millions of document transactions conducted annually.  
-  As digital transformation accelerates across government services, the demand for **online guidance platforms** is expected to grow rapidly.  
-  The market opportunity lies in serving both individuals and organizations that require frequent document processing.
-
-- **Competition:**  
-  There are **no comprehensive competitors** currently offering a paid, centralized, and verified guide for government documentation in Egypt.  
-  Existing information sources (Facebook groups, forums, individual blogs) are unreliable and unstructured.
-
----
+The platform targets **Small and Medium Egyptian Businesses (SMEs)**, **Freelancers**, and **Commercial Stores**—a market of **3.8 million active entities** mandated to adopt digital tax compliance, especially the **ETA e-Invoicing system**. The primary pain points addressed are complexity, high costs of traditional compliance, and the risk of fines due to manual errors. Market growth is driven by the government's **Digital Tax Transformation by 2026**.
 
 ### 3.2. Revenue Models
 
-1. **Subscription Model:**
-   - **Paid Access Only:** All users must subscribe to access the website’s guides and documentation.
-   - **Subscription Tiers:**  
-     - **Monthly Plan:** Short-term access for users handling one or two documents.  
-     - **Annual Plan:** Discounted rate for frequent users and businesses.
-   - **Included Features:**
-     - Full access to all government documentation guides.  
-     - Office locator with interactive map.  
-     - Step-by-step downloadable checklists.  
-     - Updates and notifications for changing requirements and fees.  
-     - Multi-language access (Arabic/English).
-
-2. **Partnership Opportunities:**
-   - Collaborate with **legal offices, translation agencies, or notary services** to promote premium plans.  
-   - Establish affiliate programs with courier/document delivery services.  
-   - Offer partnerships to **universities or HR departments** to provide access for employees and students.  
-
----
+| Model | Description | Pricing Structure |
+| :--- | :--- | :--- |
+| **Subscription Model** (Primary) | Tiered access to all core features (Invoicing, Calculation, Filing, Documentation). | Monthly/Annual plans (Annual offers 20% discount). |
+| **API Access** (Secondary) | Charging external developers/ERP systems for direct integration access. | Per-request charge or high-volume usage license fee. |
+| **Partner Programs** | Revenue sharing with affiliated accounting firms and tax consultants. | Referral fees and co-branded service packages. |
 
 ### 3.3. User Acquisition Strategy
 
-- **Digital Marketing:**  
-  Run targeted campaigns on Facebook, Instagram, TikTok, and Google Search, focusing on keywords like “renew passport Egypt” or “get ID quickly”.
-
-- **Search Engine Optimization (SEO):**  
-  Optimize service pages to appear in search results for documentation-related queries in both Arabic and English.
-
-- **Content Marketing:**  
-  Create informative posts and blogs explaining simplified versions of document processes, linking to the full premium guide.
-
-- **Institutional Collaborations:**  
-  Partner with organizations and universities to offer group subscription plans for their staff and students.
-
-- **Email Marketing:**  
-  Send periodic newsletters about newly added documentation guides or updated government procedures.
-
----
+* **Digital Marketing:** Target ads on business-centric platforms (LinkedIn, Facebook Business) focused on compliance and simplicity keywords.
+* **Content Marketing:** Publish articles and guides on **Egyptian tax compliance** (SEO-driven).
+* **Partnerships:** Form agreements with major **accounting firms** and **industry associations** for client referral.
+* **Freemium Model:** Offer a basic tier (e.g., documentation search, simple office locator) to drive sign-ups and demonstrate value.
 
 ### 3.4. Cost Structure
 
-- **Development Costs:**  
-  Frontend development (React), backend (NestJS), and Supabase integration for database and authentication.
-
-- **Maintenance Costs:**  
-  Hosting on Vercel (frontend) and Render/Railway (backend), database management, and API maintenance for maps and location services.
-
-- **Marketing & Operations:**  
-  Paid advertising, SEO optimization, content creation, and customer support.
-
-- **Operational Costs:**  
-  Team salaries (developers, designers, content managers, marketing), payment gateway fees, and legal setup.
-
----
+* **Fixed Costs:** Salaries (Developers, Support, Admin), Office/Infrastructure leasing (minimal due to cloud-native nature).
+* **Variable Costs:** **Cloud Hosting Fees** (AWS/Azure/GCP), **ETA API Fees** (if applicable), **Payment Gateway Fees** (Stripe/Paymob commissions), and **Digital Marketing Spend**.
+* **High Upfront Costs:** Initial development, legal fees for compliance verification.
 
 ### 3.5. Break-Even Analysis and Projected ROI
 
-- **Assumptions:**  
-  Based on estimated user acquisition cost (CAC), monthly subscriptions, and annual retention rate.  
-  Revenue will scale with the number of active subscribers.
+* **Break-Even Point (B.E.P.):** Calculated by dividing Total Fixed Costs by (Average Subscription Revenue per User minus Variable Cost per User).
+* **Projection:** A realistic target of **X,000 paid subscribers** is needed to cover fixed and variable costs.
+* **ROI:** Projected ROI aims for 3x return within three years, achieved by aggressive user acquisition and high retention driven by compliance necessity. 
 
-- **Break-Even Point:**  
-  Expected within **2–3 years** of launch, assuming steady user growth through digital marketing and institutional partnerships.
+[Image of a break-even chart showing total revenue and total cost lines]
 
-- **Projected ROI:**  
-  With moderate adoption, the project can achieve ROI > 1 within **4–5 years**.  
-  Growth depends on expanding content coverage and increasing institutional subscribers.
-
----
 
 ### 3.6. Potential Expansion Opportunities
 
-- **Feature Expansion:**  
-  Add online appointment scheduling for government services, document tracking, and notifications for renewal deadlines.
-
-- **Integration Expansion:**  
-  Integrate with government APIs (where available) to verify office hours or required documents in real-time.
-
-- **Platform Expansion:**  
-  Launch a **mobile app** version for easier access and offline document viewing.
-
-- **B2B Offerings:**  
-  Offer tailored enterprise dashboards for HR departments or agencies managing employee documentation.
-
-- **Delivery Partnership Expansion:**  
-  If an official agreement is established with government entities, the platform could offer a **“Document Delivery Service”**, allowing users to:
-  - Request government documents (e.g., ID renewal, birth certificate, etc.) directly through the platform.
-  - Pay securely online for processing and delivery fees.
-  - Receive the completed document at their doorstep via verified couriers.
-  This feature would transform the platform from an informational service into a **fully operational e-government assistant**.
+* **Geographic Expansion:** Extending services to other **Gulf Cooperation Council (GCC) countries** experiencing digital tax transformation (e.g., KSA, UAE VAT).
+* **Product Expansion:** Integrating with additional government services (e.g., Social Insurance Authority) or offering payroll services.
+* **Official Partnership:** Seeking an **official partnership or certification** from the ETA to enhance credibility and marketing efforts.
 
 ---
 
-## 4. SWOT Analysis
+## 4. 📊 SWOT Analysis
 
-### Strengths:
-- **Centralized Platform:** Brings together all government documentation processes in one accessible, verified, and easy-to-use website.  
-- **Reliable Information:** Provides officially verified, step-by-step guides with updated fees, locations, and requirements.  
-- **User Subscription Model:** Ensures a steady revenue stream while maintaining exclusive, high-quality content.  
-- **Modern Tech Stack:** Built with **React**, **NestJS**, and **Supabase**, enabling fast performance, scalability, and secure authentication.  
-- **Multilingual Support:** Offers both **Arabic and English**, making it accessible to a wider range of users, including expats.  
-- **Future Integration Ready:** Designed to integrate with government APIs or delivery services for document handling and tracking.  
+### Strengths (S)
+* **Automated Tax Tools:** Reduces manual effort and minimizes human error.
+* **ETA-Compliant:** Directly addresses the mandatory e-Invoicing requirement.
+* **Modern Tech Stack:** Ensures scalability, security, and fast performance (React/NestJS/Supabase).
+* **Real-time Status:** Provides immediate feedback on invoice submission and tax filing status.
 
----
+### Weaknesses (W)
+* **Reliance on ETA:** Frequent updates from the Egyptian Tax Authority require continuous, mandatory maintenance.
+* **High Barrier to Entry:** Requires significant upfront capital for development and compliance legal work.
+* **Security Risk:** Handling sensitive financial and tax data requires robust, expensive security measures.
 
-### Weaknesses:
-- **Data Maintenance:** Requires continuous verification and updating of information to maintain accuracy and trust.  
-- **Dependence on Government Cooperation:** Full functionality (e.g., delivery service or real-time updates) depends on official collaboration and API access.  
-- **Initial Awareness:** As a new platform, building credibility and user trust in the early stages will be a challenge.  
-- **Limited Automation:** Until government integrations are approved, all updates must be managed manually by the platform team.  
-- **Subscription-Only Access:** The lack of a free tier might limit early adoption or discourage casual users from subscribing.  
+### Opportunities (O)
+* **Digital Mandate:** Exploiting the massive, mandatory digital tax transformation in Egypt.
+* **Geographic Growth:** Potential expansion to other MENA regions undergoing similar digitization.
+* **Official Integration:** Securing an official partnership with the ETA or a major bank for enhanced trust.
 
----
-
-### Opportunities:
-- **Digital Transformation in Egypt:** The ongoing modernization of government services provides an ideal environment for such a platform.  
-- **Government Partnerships:** Potential for official collaboration to offer document **delivery services** or online application submission directly through the platform.  
-- **Expansion Potential:** Ability to extend coverage to other governorates.  
-- **B2B Services:** Partner with organizations and HR departments to manage employees’ official documentation through bulk access.  
-- **Mobile App Launch:** A future **mobile version** could increase accessibility and convenience for users.  
-- **Brand Authority:** Opportunity to become the **trusted national hub** for accurate and up-to-date government process information.  
+### Threats (T)
+* **Government Competition:** The government might release a full, free, and competing platform.
+* **ERP Competition:** Competition from established, large-scale ERP systems (e.g., SAP, Oracle, Zoho) that introduce integrated tax modules.
+* **Regulatory Changes:** Sudden, unexpected, and drastic changes in tax law that require complete system overhaul.
 
 ---
 
-### Threats:
-- **Regulatory Constraints:** Legal restrictions may limit certain features, such as online document processing or direct government integrations.  
-- **Data Accuracy Risks:** Incorrect or outdated information could harm credibility and lead to user dissatisfaction.  
-- **Competition from Government Portals:** Future government digital platforms could offer similar services directly.  
-- **Cybersecurity Risks:** Data breaches or account compromises could significantly damage user trust, requiring strong encryption and authentication measures.  
-- **Economic Instability:** Fluctuating user spending and lower willingness to pay for subscriptions during economic downturns.  
+### Addressing Key Problem Statements
 
----
+The platform directly solves three key problems faced by SMEs:
 
-## Addressing Key Problem Statements
-
-The Government Documentation Platform directly addresses the identified problems:
-
-1. **Scattered and inconsistent government information:**  
-   The platform provides a **centralized and verified database** for all government documentation procedures in Egypt. It consolidates steps, requirements, fees, and office locations into a single, easy-to-navigate interface, removing the confusion caused by unreliable online sources and outdated instructions.
-
-2. **Unclear procedures and missing document requirements:**  
-   Each service page includes **step-by-step guides** with clearly listed documents, fees, and expected processing times. Users can follow every stage of the process with confidence, ensuring they are fully prepared before visiting any government office.
-
-3. **Wasted time and repeated visits due to missing papers:**  
-   The system generates **automated checklists** for each procedure. Users can mark tasks as completed, verify their readiness, and avoid unnecessary trips caused by forgotten forms or missing photocopies.
-
-4. **Difficulty locating the correct office or branch:**  
-   Through the integrated **Office Locator**, users can search by service type or city to find the nearest government office. The feature provides maps, operating hours, and available services, ensuring users go to the correct branch the first time.
-
-5. **Outdated and unreliable data:**  
-   The platform is maintained with **regular data updates** and internal verification. In the future, integration with official **government APIs** will allow for real-time updates on fees, document requirements, and office information.
-
-6. **Limited accessibility and convenience:**  
-   A future expansion of the platform will include a **Document Delivery Service** (subject to government agreements). This service would allow users to **submit requests digitally** and have their completed documents **delivered securely to their homes**, offering a new level of convenience for citizens and residents.
-
-By solving these core issues, the Government Documentation Platform transforms how users interact with bureaucratic processes — making government services **clearer, faster, and more accessible** for everyone.
+1.  **Complexity of ETA API:** Solved by providing a **user-friendly, simplified interface** that abstracts away the technical requirements of XML signing and API communication.
+2.  **Manual Tax Filing/Calculations:** Solved by **Automated Tax Calculation** (VAT, Income Tax) and the **Step-by-Step Checklist**, which guarantees compliance and accuracy.
+3.  **Lack of Current Information:** Solved by the **Government Documentation Search & Access** feature, which centralizes all relevant, up-to-date legal documents.
