@@ -33,21 +33,30 @@
 ## Project Overview
 The Tax Application is a SaaS platform that helps businesses in Egypt calculate taxes, manage invoices, integrate with the Egyptian Tax Authority (ETA), and automate tax filing.
 
-**It allows users to:**
-1.Register and authenticate via Supabase.
-2.Create and manage businesses.
-3.Submit invoices to ETA.
-4.Track submission status.
-5.Calculate taxes automatically.
-6.View monthly/annual income reports.
-7.Manage subscriptions for using the system.
 
-**Technical Stack:**
-Frontend: React / Next.js
-Backend: NestJS (Clean Architecture)
-Database: Supabase Postgres
-Auth: Supabase Auth (email)
-Integration: ETA eInvoicing APIs
+**The System Allows Users To:**
+
+1.  **Register and Authenticate** securely via **Supabase Auth** (email).
+2.  **Create and Manage** business profiles and settings.
+3.  **Submit Invoices** directly to the **ETA eInvoicing** system.
+4.  **Track Submission Status** for all submitted invoices.
+5.  **Calculate Taxes** automatically for accurate reporting.
+6.  **View Financial Reports** (monthly/annual income summaries).
+7.  **Manage Subscriptions** for continuous system access.
+
+---
+
+## Technical Stack & Architecture
+
+This application is built using a modern, scalable architecture.
+
+| Component | Technology / Service | Notes |
+| :--- | :--- | :--- |
+| **Frontend** | React / Next.js | Modern, server-rendered UI framework. |
+| **Backend** | NestJS | Clean Architecture pattern for scalable, maintainable APIs. |
+| **Database** | Supabase Postgres | Robust and reliable relational database. |
+| **Authentication** | Supabase Auth (Email) | Integrated user authentication service. |
+| **Integration** | ETA eInvoicing APIs | Direct connection for regulatory compliance. |
 
 ## 1. UML Diagrams
 
