@@ -8,29 +8,20 @@ export class Invoice {
   @Column({ type: 'uuid', name: 'business_id' })
   businessId: string;
 
-  @Column({ name: 'invoice_uuid' })
+  @Column({ type: 'varchar', name: 'invoice_uuid' })
   invoiceUuid: string;
 
-  @Column({ name: 'invoice_number' })
+  @Column({ type: 'varchar', name: 'invoice_number' })
   invoiceNumber: string;
 
-  @Column({ name: 'customer_name' })
-  customerName: string;
+  @Column({ type: 'varchar', name: 'issuer_name' })
+  issuerName: string;
 
-  @Column({ nullable: true, name: 'customer_tax_id' })
-  customerTaxId: string;
-
-  @Column({ type: 'date', name: 'issue_date' })
-  issueDate: string;
+  @Column({ type: 'varchar', name: 'receiver_name' })
+  receiverName: string;
 
   @Column({ type: 'numeric', name: 'total_amount' })
   totalAmount: number;
-
-  @Column({ nullable: true, name: 'eta_submission_status' })
-  etaSubmissionStatus: string;
-
-  @Column({ nullable: true, name: 'eta_document_id' })
-  etaDocumentId: string;
 
   @Column({ type: 'timestamp', default: () => 'now()', name: 'created_at' })
   createdAt: Date;

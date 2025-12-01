@@ -14,6 +14,7 @@ export class AuthenticationService {
 
     async register(registerDTO: RegisterUserDTO){
         const supabase = this.supabaseService.getClient();
+        console.log('Registering user:', registerDTO);
         const { data, error } = await supabase.auth.signUp({
             email: registerDTO.email,
             password: registerDTO.password,
@@ -33,6 +34,7 @@ export class AuthenticationService {
             fullName: registerDTO.fullName,
             nationalId: registerDTO.nationalId,
             mobile: registerDTO.mobile,
+            dateOfBirth: new Date(this.extractDateOfBirthFromNationalId(registerDTO.nationalId)),
             supabaseUid: user.id,
             createdAt: new Date(),
             updatedAt: new Date()
@@ -59,4 +61,29 @@ export class AuthenticationService {
         return data;
         
     }
+    
+    extractDateOfBirthFromNationalId(nationalId: string): string {
+        if (!/^\d{14}$/.test(nationalId)) {
+            throw new Error('Invalid Egyptian National ID format.');
+        }
+
+        const centuryCode: string = nationalId[0];
+        const year: string = nationalId.substring(1, 3);
+        const month: string = nationalId.substring(3, 5);
+        const day: string = nationalId.substring(5, 7);
+
+        let centuryPrefix: string;
+        if (centuryCode === '2') {
+            centuryPrefix = '19';
+        } else if (centuryCode === '3') {
+            centuryPrefix = '20';
+        } else {
+            throw new Error('Invalid century code in national ID.');
+        }
+
+        const fullYear: string = `${centuryPrefix}${year}`;
+
+        return `${day}-${month}-${fullYear}`;
+        }
+
 }
