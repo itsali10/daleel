@@ -28,5 +28,7 @@ export class User {
 
   @Column({ type: 'timestamp', default: () => 'now()', name: 'updated_at' })
   updatedAt: Date;
-}
 
+  @Column({ type: 'bool', name: 'is_subscribed', default: false })
+  isSubscribed: Boolean;
+}

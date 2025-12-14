@@ -37,7 +37,8 @@ export class AuthenticationService {
             dateOfBirth: new Date(this.extractDateOfBirthFromNationalId(registerDTO.nationalId)),
             supabaseUid: user.id,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            isSubscribed: false,
         })
         await this.userRepository.save(await newUser);
 

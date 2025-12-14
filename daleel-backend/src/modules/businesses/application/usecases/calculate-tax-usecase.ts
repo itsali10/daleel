@@ -1,6 +1,19 @@
 import { Injectable } from "@nestjs/common";
 import { IInvoiceRepository } from "../../../invoices/domain/repositories/IInvoiceRepository";
 
+export interface QuarterlyTaxResult {
+    quarter: number;
+    totalRevenue: number;
+    taxRate: number;
+    taxAmount: number;
+}
+
+export interface YearlyTaxCalculation {
+    year: number;
+    quarterlyTaxes: QuarterlyTaxResult[];
+    totalTaxForYear: number;
+}
+
 @Injectable()
 export class CalculateTaxUsecase {
     
@@ -8,18 +21,44 @@ export class CalculateTaxUsecase {
         private readonly invoiceRepository: IInvoiceRepository
     ) {}
 
-    async execute(businessId: string): Promise<{ totalRevenue: number; taxRate: number; taxAmount: number }> {
-        // Get total amount from all invoices for this business
-        const totalRevenue = await this.invoiceRepository.getTotalInvoiceAmount(businessId);
+    async execute(businessId: string, year?: number): Promise<YearlyTaxCalculation> {
+        const targetYear = year || new Date().getFullYear();
         
-        // Calculate tax based on revenue brackets
-        const taxRate = this.calculateTaxRate(totalRevenue);
-        const taxAmount = totalRevenue * taxRate;
+        // Get quarterly totals for the specified year
+        const quarterlyTotals = await this.invoiceRepository.getQuarterlyInvoiceTotals(businessId, targetYear);
+        
+        // Calculate tax for each quarter using cumulative YTD approach
+        let cumulativeRevenue = 0;
+        let cumulativeTaxPaid = 0;
+        
+        const quarterlyTaxes = quarterlyTotals.map(quarter => {
+            // Add current quarter revenue to YTD total
+            cumulativeRevenue += quarter.totalRevenue;
+            
+            // Calculate tax on YTD revenue
+            const taxRate = this.calculateTaxRate(cumulativeRevenue);
+            const totalTaxOnYTD = cumulativeRevenue * taxRate;
+            
+            // Tax due this quarter = Total tax on YTD - Tax already paid
+            const taxAmount = totalTaxOnYTD - cumulativeTaxPaid;
+            
+            // Update cumulative tax paid
+            cumulativeTaxPaid = totalTaxOnYTD;
+
+            return {
+                quarter: quarter.quarter,
+                totalRevenue: quarter.totalRevenue,
+                taxRate: taxRate * 100, // Return as percentage
+                taxAmount: Math.max(0, taxAmount) // Ensure non-negative
+            };
+        });
+
+        const totalTaxForYear = quarterlyTaxes.reduce((sum, q) => sum + q.taxAmount, 0);
 
         return {
-            totalRevenue,
-            taxRate: taxRate * 100, // Return as percentage
-            taxAmount
+            year: targetYear,
+            quarterlyTaxes,
+            totalTaxForYear
         };
     }
 

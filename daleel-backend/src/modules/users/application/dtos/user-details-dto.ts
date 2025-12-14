@@ -4,4 +4,6 @@ export class UserDetailsDTO{
     mobile: string;
     nationalId: string;
     dateOfBirth: Date;
+    isSubscribed?: boolean;
+    subscriptionStatus?: string;
 }

@@ -23,6 +23,9 @@ export class Invoice {
   @Column({ type: 'numeric', name: 'total_amount' })
   totalAmount: number;
 
+  @Column({ type: 'timestamp', name: 'invoice_date' })
+  invoiceDate: Date;
+
   @Column({ type: 'timestamp', default: () => 'now()', name: 'created_at' })
   createdAt: Date;
 }

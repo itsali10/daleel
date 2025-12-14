@@ -25,7 +25,7 @@ export class BusinessController {
     }
 
     @Post('calculate-tax')
-    async calculateTax(@Body('businessId') businessId: string): Promise<{ totalRevenue: number; taxRate: number; taxAmount: number }> {
-        return this.calculateTaxUsecase.execute(businessId);
+    async calculateTax(@Body() body: { businessId: string; year?: number }) {
+        return this.calculateTaxUsecase.execute(body.businessId, body.year);
     }
 }

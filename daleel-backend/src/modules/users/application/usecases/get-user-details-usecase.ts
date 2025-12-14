@@ -20,6 +20,9 @@ export class GetUserDetailsUsecase {
         userDetailsDTO.mobile = userDetails.mobile;
         userDetailsDTO.nationalId = userDetails.nationalId;
         userDetailsDTO.dateOfBirth = userDetails.dateOfBirth;
+        // Map subscription fields if present
+        userDetailsDTO.isSubscribed = (userDetails as any).isSubscribed ?? false;
+        userDetailsDTO.subscriptionStatus = userDetailsDTO.isSubscribed ? 'Subscribed' : 'Not Subscribed';
         return userDetailsDTO;
     }
 }

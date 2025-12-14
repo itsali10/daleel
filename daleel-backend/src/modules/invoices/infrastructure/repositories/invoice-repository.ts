@@ -21,7 +21,8 @@ export class InvoiceRepository extends IInvoiceRepository {
             invoiceNumber: dto.invoiceNumber,
             issuerName: dto.issuerName,
             receiverName: dto.receiverName,
-            totalAmount: dto.totalAmount
+            totalAmount: dto.totalAmount,
+            invoiceDate: dto.invoiceDate
         });
         return await this.invoiceRepo.save(invoice);
     }
@@ -40,5 +41,35 @@ export class InvoiceRepository extends IInvoiceRepository {
             .getRawOne();
         
         return parseFloat(result?.total || '0');
+    }
+
+    async getQuarterlyInvoiceTotals(businessId: string, year: number): Promise<{ quarter: number; totalRevenue: number }[]> {
+        const startDate = new Date(year, 0, 1);
+        const endDate = new Date(year, 11, 31, 23, 59, 59);
+
+        const invoices = await this.invoiceRepo.find({
+            where: {
+                businessId,
+            },
+        });
+
+        // Filter invoices for the specified year and group by quarter
+        const quarterlyTotals = [1, 2, 3, 4].map(quarter => {
+            const quarterStart = new Date(year, (quarter - 1) * 3, 1);
+            const quarterEnd = new Date(year, quarter * 3, 0, 23, 59, 59);
+
+            const quarterInvoices = invoices.filter(invoice => {
+                const invoiceDate = invoice.invoiceDate ? new Date(invoice.invoiceDate) : new Date(invoice.createdAt);
+                return invoiceDate >= quarterStart && invoiceDate <= quarterEnd;
+            });
+
+            const totalRevenue = quarterInvoices.reduce((sum, invoice) => 
+                sum + parseFloat(invoice.totalAmount.toString()), 0
+            );
+
+            return { quarter, totalRevenue };
+        });
+
+        return quarterlyTotals;
     }
 }

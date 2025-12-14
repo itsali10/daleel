@@ -4,4 +4,5 @@ export class CreateInvoiceDTO {
     issuerName: string;
     receiverName: string;
     totalAmount: number;
+    invoiceDate: Date;
 }
